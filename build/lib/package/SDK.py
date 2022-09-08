@@ -1,18 +1,48 @@
+import array
+from datetime import datetime
 import requests
-from typing import List, Optional, Sequence
-from dataclasses import dataclass
-# Set, Tuple, Dict
+from typing import List, Set, Tuple, Dict
 from enum import Enum
 
+class epagination(object):
+    def __init__(self):
+        self.meta = meta()
+        self.items = items(item=[])
+class meta(object):
+    def __init__(self,all={},total="none",page="none"):
+        self.all = all
+        self.total = total
+        self.page = page
 
-class pagination(object):
-    def __init__(self,meta:dict,items = []):
-        self.meta = meta
-        self.items = items
-@dataclass
-class item():
-    v: float
-    date : int
+
+class items(object):
+    def __init__(self,item:List[dict]=[],date:List[int]=[],v:List[int]=[]):
+        self.item = item
+        self.date = date
+        self.v = v
+
+
+
+#class pagination(object):
+#    def __init__(self, meta: dict):
+#        self.meta = meta
+
+#class data(pagination):
+#    def __init__(self, meta: dict):
+#        self.items = self.items()
+#        pagination.__init__(self,meta)
+
+
+#    class items():
+#        def __init__(self, v=array.array('d', [])):
+#            self.v = v
+
+
+
+
+
+
+
 
 class data_atm:
     def __init__(self, alldata, Today, Yesterday, Two_days_ago, One_week_ago, Two_weeks_ago, Three_weeks_ago
@@ -67,6 +97,8 @@ class response(object):
 
 
 def query(**kwargs):
+    keys=[]
+    values=[]
     queryurl="?"
     for key, value in kwargs.items():
         if value == "":
@@ -330,15 +362,77 @@ class api():
                 elif makequery != "":
                     api_url = self.url+ "total_oi/market/" + currency.lower() + makequery
                     response = requests.get(api_url,headers=api.header).json()
-                    Response = pagination(response['meta'])
+                    #date_conv(response)
+                    Response = epagination()
+                    Response.meta.all = response['meta']
+                    Response.meta.page = response['meta']['page']
+                    Response.meta.total = response['meta']['total']
+                    i=0
                     for i in range(len(response['items'])):
-                        Response.items.append(item(response['items'][i]['v'], response['items'][i]['date']))
+                        Response.items.item.append(response['items'][i])
+                        Response.items.date.append(response['items'][i]['date'])
+                        Response.items.v.append(response['items'][i]['v'])
                     return Response
                 else:
                     api_url = self.url+ "total_oi/market/" + currency.lower()
                     response = requests.get(api_url,headers=api.header).json()
-                    Response = pagination(response['meta'])
+                    #date_conv(response)
+                    Response = epagination()
+                    Response.meta.all = response['meta']
+                    Response.meta.page = response['meta']['page']
+                    Response.meta.total = response['meta']['total']
+                    i=0
                     for i in range(len(response['items'])):
-                        Response.items.append(item(response['items'][i]['v'], response['items'][i]['date']))
+                        Response.items.item.append(response['items'][i])
+                        Response.items.date.append(response['items'][i]['date'])
+                        Response.items.v.append(response['items'][i]['v'])
                     return Response
 
+        class derivs:
+            url="https://gateway.devitas.ch/historical/derivs/"
+            pass
+            @classmethod
+            def summary(self,currency: str,start="",end="",limit="",page=""):
+                """
+
+                :param currency: BTC,ETH,BCH
+                :type currency:
+                :param start: EXP:2022-06-07
+                :type end:
+                :param end: EXP:2022-06-14
+                :type end :
+                :param limit: 10
+                :type limit:
+                :param page: 1
+                :type page:
+                :return: summary
+                :rtype:
+                """
+                currency=currency.upper()
+                makequery = query(start=start, end=end, limit=limit, page=page)
+                if currency not in CURRENCY.__members__:
+                    raise TypeError("currency not available")
+                elif makequery != "":
+                    api_url = self.url+ "summary/" + currency.lower() + makequery
+                    response = requests.get(api_url,headers=api.header).json()
+                    #date_conv(response)
+                    Response = epagination()
+                    Response.meta.all = response['meta']
+                    Response.meta.page = response['meta']['page']
+                    Response.meta.total = response['meta']['total']
+                    i=0
+                    for i in range(len(response['items'])):
+                        Response.items.item.append(response['items'][i])
+                    return Response
+                else:
+                    api_url = self.url+ "summary/" + currency.lower()
+                    response = requests.get(api_url,headers=api.header).json()
+                    #date_conv(response)
+                    Response = epagination()
+                    Response.meta.all = response['meta']
+                    Response.meta.page = response['meta']['page']
+                    Response.meta.total = response['meta']['total']
+                    i=0
+                    for i in range(len(response['items'])):
+                        Response.items.item.append(response['items'][i])
+                    return Response
