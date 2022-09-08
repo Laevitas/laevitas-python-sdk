@@ -34,8 +34,7 @@ sdk = SDK.api()
 sdk.configure('your-api-key')
 
 response = sdk.historical.move.total_oi(currency="btc", start="2022-06-07", end="2022-06-14", limit="10", page="2")
-for i in response.items:
-    print(i.v)
+print(response)
                                      
 
 

@@ -3,7 +3,7 @@ from unittest.mock import MagicMock, patch
 from Laevitas import SDK
 
 sdk = SDK.api()
-sdk.configure('35ee699f-7003-4fad-948f-921d4fdb7603')
+sdk.configure('your-api-key')
 
 
 class Testoptions(TestCase):
@@ -12,8 +12,6 @@ class Testoptions(TestCase):
         response = sdk.realtime.options.instruments(market="deribit", currency="btc")
         self.assertTrue(response, message)
         self.assertListEqual(list(response["data"][0].keys()),["market","currency","maturity","strike","option_type","instrument"])
-
-
 
     def test_get_atm(self):
         message = "Test value is not true."
