@@ -1,1 +1,1 @@
-from .SDK import query
+from .sdk import query

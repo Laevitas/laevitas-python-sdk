@@ -1,9 +1,11 @@
-from Laevitas import SDK
+from laevitas import sdk
 
-sdk = SDK.api()
-sdk.configure('your-api-key')
-#test = sdk.realtime.options.instruments(market="deribit",currency="btc")
-test1 = sdk.realtime.options.oi_strike(market="deribit",currency="btc",maturity="30JUN23")
+resp = sdk.api()
+resp.configure('your-api-key')
+test1 = resp.historical.move.total_oi(market="FTX", currency="BTC",
+                                                      start="2022-09-02", end="2022-09-09", limit="10",
+                                                      page="1")
+
 print(test1)
 
 

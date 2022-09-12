@@ -1,5 +1,5 @@
 import requests
-from Laevitas.dataclasses import *
+from laevitas.dataclasses import *
 # from dataclasses import dataclass, field, make_dataclass
 from enum import Enum
 # from typing import List
@@ -136,13 +136,7 @@ class api():
                     maturity = maturity.upper()
                     api_url = self.url + "gex_date/" + market + "/" + currency + "/" + maturity
                     responsedata = requests.get(api_url, headers=api.header).json()
-                    Response = Igex_date(responsedata,responsedata['date'])
-                    for i in range(len(responsedata['data'])):
-                        Response.data.append(gex_date_data(responsedata['data'][i]['strike'],
-                                                           responsedata['data'][i]['optionType'],
-                                                           responsedata['data'][i]['gex']
-                                                           ))
-                    return Response
+                    return responsedata
 
             @classmethod
             def gex_date_all(self, market: str, currency: str):
@@ -164,13 +158,7 @@ class api():
                 else:
                     api_url = self.url + "gex_date_all/" + market + "/" + currency
                     responsedata = requests.get(api_url, headers=api.header).json()
-                    Response = Igex_date_all(responsedata,responsedata['date'])
-                    for i in range(len(responsedata['data'])):
-                        Response.data.append(gex_date_all_data(responsedata['data'][i]['strike'],
-                                                                               responsedata['data'][i]['optionType'],
-                                                                             responsedata['data'][i]['gex']
-                                                                               ))
-                    return Response
+                    return responsedata
 
             @classmethod
             def maturities(self, market: str, currency: str):
@@ -214,14 +202,7 @@ class api():
                 else:
                     api_url = self.url + "oi_expiry/" + market + "/" + currency
                     responsedata = requests.get(api_url, headers=api.header).json()
-                    Response = Iexpiry(responsedata, responsedata['date'])
-                    for i in range(len(responsedata['data'])):
-                        Response.data.append(expiry_data(responsedata['data'][i]['maturity'],
-                                                            responsedata['data'][i]['c'],
-                                                            responsedata['data'][i]['p'],
-                                                            responsedata['data'][i]['notional_c'],
-                                                            responsedata['data'][i]['notional_p']))
-                    return Response
+                    return responsedata
 
             @classmethod
             def oi_strike_all(self, market: str, currency: str):
@@ -243,14 +224,7 @@ class api():
                 else:
                     api_url = self.url + "oi_strike_all/" + market + "/" + currency
                     responsedata = requests.get(api_url, headers=api.header).json()
-                    Response = Ioi_strike_all(responsedata, responsedata['date'])
-                    for i in range(len(responsedata['data'])):
-                        Response.data.append(oi_strike_all_data(responsedata['data'][i]['strike'],
-                                                            responsedata['data'][i]['c'],
-                                                            responsedata['data'][i]['p'],
-                                                            responsedata['data'][i]['notional_c'],
-                                                            responsedata['data'][i]['notional_p']))
-                    return Response
+                    return responsedata
 
             @classmethod
             def oi_type(self, market: str, currency: str):
@@ -294,12 +268,7 @@ class api():
                 else:
                     api_url = self.url + "top_traded_option/" + market + "/" + currency
                     responsedata = requests.get(api_url, headers=api.header).json()
-                    Response = Itop_traded_option(responsedata, responsedata['date'])
-                    for i in range(len(responsedata['data'])):
-                        Response.data.append(top_traded_option_data(responsedata['data'][i]['volume'],
-                                                                responsedata['data'][i]['instrument'],
-                                                                responsedata['data'][i]['volume_usd']))
-                    return Response
+                    return responsedata
 
             @classmethod
             def v_expiry(self, market: str, currency: str):
@@ -321,14 +290,7 @@ class api():
                 else:
                     api_url = self.url + "v_expiry/" + market + "/" + currency
                     responsedata = requests.get(api_url, headers=api.header).json()
-                    Response = Iexpiry(responsedata, responsedata['date'])
-                    for i in range(len(responsedata['data'])):
-                        Response.data.append(expiry_data(responsedata['data'][i]['maturity'],
-                                                            responsedata['data'][i]['c'],
-                                                            responsedata['data'][i]['p'],
-                                                            responsedata['data'][i]['notional_c'],
-                                                            responsedata['data'][i]['notional_p']))
-                    return Response
+                    return responsedata
 
             @classmethod
             def v_strike_all(self, market: str, currency: str):
@@ -350,14 +312,7 @@ class api():
                 else:
                     api_url = self.url + "v_strike_all/" + market + "/" + currency
                     responsedata = requests.get(api_url, headers=api.header).json()
-                    Response = v_strike_alli(responsedata, responsedata['date'])
-                    for i in range(len(responsedata['data'])):
-                        Response.data.append(v_strike_all_data(responsedata['data'][i]['strike'],
-                                                            responsedata['data'][i]['C'],
-                                                            responsedata['data'][i]['P'],
-                                                            responsedata['data'][i]['USDVC'],
-                                                            responsedata['data'][i]['USDVP']))
-                    return Response
+                    return responsedata
 
             @classmethod
             def volume_buy_sell_all(self, market: str, currency: str):
@@ -581,16 +536,7 @@ class api():
                     maturity = maturity.upper()
                     api_url = self.url + "greeks/" + market + "/" + currency + "/" + maturity + "/" + optiontype
                     responsedata = requests.get(api_url, headers=api.header).json()
-                    Response = Igreeks(responsedata,responsedata['date'])
-                    for i in range(len(responsedata['data'])):
-                        Response.data.append(greeks_data(responsedata['data'][i]['strike'],
-                                                           responsedata['data'][i]['underlying_price'],
-                                                           responsedata['data'][i]['delta'],
-                                                           responsedata['data'][i]['gamma'],
-                                                           responsedata['data'][i]['theta'],
-                                                           responsedata['data'][i]['vega']
-                                                           ))
-                    return Response
+                    return responsedata
 
             @classmethod
             def iv_all(self, market: str, currency: str, maturity: str, type: str):
@@ -1142,13 +1088,7 @@ class api():
                 else:
                     api_url = self.url + "oi_gainers/" + market + "/" + oitype.lower() + "/" + period
                     response = requests.get(api_url, headers=api.header).json()
-                    Response = Ioi_gainers(response,response['date'])
-                    for i in range(len(response['data'])):
-                        Response.data.append(oi_gainers_data(response['data'][i]['symbol'],
-                                                             response['data'][i]['open_interest_change'],
-                                                             response['data'][i]['open_interest_change_notional']
-                                                         ))
-                    return Response
+                    return response
 
             @classmethod
             def price_gainers(self, market: str, oitype: str, period: str):
@@ -2017,33 +1957,7 @@ class api():
                 else:
                     api_url = self.url + "type/iv_bid_ask/" + market.lower() + "/" + currency.lower() + "/" + type
                     response = requests.get(api_url, headers=api.header).json()
-
-                Response = IpaginationIv_bid_ask(response,
-                                             Ipaginationmeta(response['meta']['total'], response['meta']['page'],
-                                                             response['meta']['items']))
-
-                for i in range(len(response["items"])):
-                    Response.date.append(response["items"][i]['date'])
-                    Response.week.append(iv_bid_ask_data(response['items'][i]['7']['ask'],
-                                                         response['items'][i]['7']['bid'],
-                                                         response['items'][i]['7']['mark']))
-                    Response.two_weeks.append(iv_bid_ask_data(response['items'][i]['14']['ask'],
-                                                         response['items'][i]['14']['bid'],
-                                                         response['items'][i]['14']['mark']))
-                    Response.one_month.append(iv_bid_ask_data(response['items'][i]['30']['ask'],
-                                                         response['items'][i]['30']['bid'],
-                                                         response['items'][i]['30']['mark']))
-                    Response.two_months.append(iv_bid_ask_data(response['items'][i]['60']['ask'],
-                                                         response['items'][i]['60']['bid'],
-                                                         response['items'][i]['60']['mark']))
-                    Response.half_a_year.append(iv_bid_ask_data(response['items'][i]['180']['ask'],
-                                                         response['items'][i]['180']['bid'],
-                                                         response['items'][i]['180']['mark']))
-                    Response.year.append(iv_bid_ask_data(response['items'][i]['365']['ask'],
-                                                         response['items'][i]['365']['bid'],
-                                                         response['items'][i]['365']['mark']))
-
-                return Response
+                return response
 
             @classmethod
             def total_oi(self, market: str, currency: str, maturity: str, start="", end="", limit="", page=""):
@@ -2693,23 +2607,10 @@ class api():
                 elif makequery != "":
                     api_url = self.url+ "total_oi/" + market.lower()+ "/" +currency.lower() + makequery
                     response = requests.get(api_url,headers=api.header).json()
-                    Response = Ipagination(response,
-                        Ipaginationmeta(response['meta']['total'], response['meta']['page'], response['meta']['items'])
-
-                    )
-                    for i in range(len(response['items'])):
-                        Response.items.append(IDateV(response['items'][i]['v'], response['items'][i]['date']))
-                    return Response
                 else:
                     api_url = self.url+ "total_oi/" + market.lower()+ "/" +currency.lower()
                     response = requests.get(api_url,headers=api.header).json()
-                    Response = Ipagination(response,
-                        Ipaginationmeta(response['meta']['total'],response['meta']['page'],response['meta']['items'])
-
-                    )
-                    for i in range(len(response['items'])):
-                        Response.items.append(IDateV(response['items'][i]['v'], response['items'][i]['date']))
-                    return Response
+                return response
 
             @classmethod
             def volume_buy_sell(self,market="ftx" ,currency="btc", start="", end="", limit="", page=""):
