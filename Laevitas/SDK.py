@@ -634,6 +634,47 @@ class api():
                     responsedata = requests.get(api_url, headers=api.header).json()
                     return responsedata
 
+            @classmethod
+            def oi_breakdown(self):
+                """
+                :return: json data of open interest breakdown
+                :rtype:
+                """
+                api_url = self.url + "oi_breakdown"
+                responsedata = requests.get(api_url, headers=api.header).json()
+                return responsedata
+
+            @classmethod
+            def volume_breakdown(self):
+                """
+                :return: json data volume breakdown
+                :rtype:
+                """
+                api_url = self.url + "volume_breakdown"
+                responsedata = requests.get(api_url, headers=api.header).json()
+                return responsedata
+
+            @classmethod
+            def oi_breakdown_by_currency(self):
+                """
+                :return: json data of open interest breakdown by currency
+                :rtype:
+                """
+                api_url = self.url + "oi_breakdown_by_currency"
+                responsedata = requests.get(api_url, headers=api.header).json()
+                return responsedata
+
+            @classmethod
+            def volume_breakdown_by_currency(self):
+                """
+                :return: json data of volume breakdown by currency
+                :rtype:
+                """
+                api_url = self.url + "volume_breakdown_by_currency"
+                responsedata = requests.get(api_url, headers=api.header).json()
+                return responsedata
+
+
         class futures:
             url = "https://api.laevitas.ch/analytics/futures/"
             pass

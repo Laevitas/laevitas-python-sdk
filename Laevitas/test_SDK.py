@@ -110,6 +110,19 @@ class Testoptions(TestCase):
         message = "Test value is not true."
         self.assertTrue(resp.realtime.options.snapshot(market="deribit", currency="btc"), message)
 
+    def test_oi_breakdown(self):
+        message = "Test value is not true."
+        self.assertTrue(resp.realtime.options.oi_breakdown(), message)
+    def test_sna(self):
+        message = "Test value is not true."
+        self.assertTrue(resp.realtime.options.volume_breakdown(), message)
+    def test_oi_breakdown_by_currency(self):
+        message = "Test value is not true."
+        self.assertTrue(resp.realtime.options.oi_breakdown_by_currency(), message)
+    def test_volume_breakdown_by_currency(self):
+        message = "Test value is not true."
+        self.assertTrue(resp.realtime.options.volume_breakdown_by_currency(), message)
+
 
 class Testfutures(TestCase):
     def test_instruments(self):
