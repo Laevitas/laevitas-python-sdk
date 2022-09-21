@@ -8,7 +8,7 @@ setup(
     version='1.2.0',
     packages=['laevitas'],
     url='https://github.com/Elyesbdakhlia',
-    download_url='https://github.com/Laevitas/laevitas-python-sdk/archive/refs/tags/1.1.0.tar.gz',
+    download_url='https://github.com/Laevitas/laevitas-python-sdk/archive/refs/tags/1.2.0.tar.gz',
     license='apache-2.0',
     author='Elyes',
     author_email='elyes@laevitas.ch',

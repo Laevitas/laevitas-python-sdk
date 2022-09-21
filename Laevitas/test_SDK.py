@@ -1,9 +1,8 @@
 from unittest import TestCase
-from unittest.mock import MagicMock, patch
 from laevitas import sdk
 
 resp = sdk.api()
-resp.configure('your-api-key')
+resp.configure('api-key')
 
 
 class Testoptions(TestCase):
@@ -11,7 +10,8 @@ class Testoptions(TestCase):
         message = "Test value is not true."
         response = resp.realtime.options.instruments(market="deribit", currency="btc")
         self.assertTrue(response, message)
-        self.assertListEqual(list(response["data"][0].keys()),["market","currency","maturity","strike","option_type","instrument"])
+        self.assertListEqual(list(response["data"][0].keys()),
+                             ["market", "currency", "maturity", "strike", "option_type", "instrument"])
 
     def test_get_atm(self):
         message = "Test value is not true."
@@ -104,7 +104,8 @@ class Testoptions(TestCase):
     def test_oi_net_change(self):
         message = "Test value is not true."
         self.assertTrue(
-            resp.realtime.options.oi_net_change(market="deribit", currency="btc", maturity="30JUN23", hour="2"), message)
+            resp.realtime.options.oi_net_change(market="deribit", currency="btc", maturity="30JUN23", hour="2"),
+            message)
 
     def test_snapshot(self):
         message = "Test value is not true."
@@ -113,12 +114,15 @@ class Testoptions(TestCase):
     def test_oi_breakdown(self):
         message = "Test value is not true."
         self.assertTrue(resp.realtime.options.oi_breakdown(), message)
+
     def test_sna(self):
         message = "Test value is not true."
         self.assertTrue(resp.realtime.options.volume_breakdown(), message)
+
     def test_oi_breakdown_by_currency(self):
         message = "Test value is not true."
         self.assertTrue(resp.realtime.options.oi_breakdown_by_currency(), message)
+
     def test_volume_breakdown_by_currency(self):
         message = "Test value is not true."
         self.assertTrue(resp.realtime.options.volume_breakdown_by_currency(), message)
@@ -323,6 +327,37 @@ class TestoptionsH(TestCase):
         self.assertTrue(resp.historical.options.volume_strike(market="deribit", currency="BTC", maturity="30JUN23",
                                                               date="2022-07-24T01"), message)
 
+    def test_oi_by_market(self):
+        message = "Test value is not true."
+        self.assertTrue(
+            resp.historical.options.oi_by_market(market="deribit", start="2022-08-30", end="2022-09-06", limit="10",
+                                                 page="1"), message)
+
+    def test_volume_by_market(self):
+        message = "Test value is not true."
+        self.assertTrue(
+            resp.historical.options.volume_by_market(market="deribit", start="2022-08-30", end="2022-09-06", limit="10",
+                                                     page="1"), message)
+
+    def test_oi_by_currency(self):
+        message = "Test value is not true."
+        self.assertTrue(
+            resp.historical.options.oi_by_currency(currency="btc", start="2022-08-30", end="2022-09-06", limit="10",
+                                                   page="1"), message)
+
+    def test_volume_by_currency(self):
+        message = "Test value is not true."
+        self.assertTrue(
+            resp.historical.options.volume_by_currency(currency="btc", start="2022-08-30", end="2022-09-06", limit="10",
+                                                       page="1"), message)
+
+    def test_iv_rv(self):
+        message = "Test value is not true."
+        self.assertTrue(
+            resp.historical.options.iv_rv(market="deribit", currency="btc", start="2022-08-30", end="2022-09-06",
+                                          limit="10",
+                                          page="1"), message)
+
     def test_volume_pc_ratio(self):
         message = "Test value is not true."
         self.assertTrue(resp.historical.options.volume_pc_ratio(market="deribit",
@@ -356,7 +391,8 @@ class TestoptionsH(TestCase):
         message = "Test value is not true."
         self.assertTrue(resp.historical.options.volume_total(market="deribit",
                                                              currency="BTC",
-                                                             start="2022-08-30", end="2022-09-06", limit="10", page="1"),
+                                                             start="2022-08-30", end="2022-09-06", limit="10",
+                                                             page="1"),
                         message)
 
     def test_oi_pc_ratio(self):
@@ -391,7 +427,8 @@ class TestoptionsH(TestCase):
         message = "Test value is not true."
         self.assertTrue(resp.historical.options.atm_iv_model(market="deribit",
                                                              currency="BTC", type="25p",
-                                                             start="2022-08-30", end="2022-09-06", limit="10", page="1"),
+                                                             start="2022-08-30", end="2022-09-06", limit="10",
+                                                             page="1"),
                         message)
 
     def test_butterfly(self):
@@ -464,7 +501,8 @@ class TestoptionsH(TestCase):
         message = "Test value is not true."
         self.assertTrue(resp.historical.options.total_volume(market="deribit",
                                                              currency="BTC", maturity="30JUN23",
-                                                             start="2022-08-30", end="2022-09-06", limit="10", page="1"),
+                                                             start="2022-08-30", end="2022-09-06", limit="10",
+                                                             page="1"),
                         message)
 
     def test_volume_oi_by_exchange(self):
@@ -669,6 +707,7 @@ class TestderivsH(TestCase):
         self.assertTrue(resp.historical.derivs.futures(symbol="ETHUSDTH22", market="DERIBIT",
                                                        start="2022-08-30", end="2022-09-06", limit="10",
                                                        page="1"), message)
+
     def test_summary(self):
         message = "Test value is not true."
         self.assertTrue(resp.historical.derivs.summary(currency="BTC",

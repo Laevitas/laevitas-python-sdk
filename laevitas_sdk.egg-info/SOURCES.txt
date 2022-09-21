@@ -1,0 +1,13 @@
+LICENSE.txt
+README.md
+setup.cfg
+setup.py
+laevitas/__init__.py
+laevitas/dataclasses.py
+laevitas/sdk.py
+laevitas/test_SDK.py
+laevitas_sdk.egg-info/PKG-INFO
+laevitas_sdk.egg-info/SOURCES.txt
+laevitas_sdk.egg-info/dependency_links.txt
+laevitas_sdk.egg-info/requires.txt
+laevitas_sdk.egg-info/top_level.txt
