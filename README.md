@@ -127,7 +127,7 @@ print(response)
 |*historical* | options   | atm_iv(market, currency, start(opt), end(opt), limit(opt), page(opt)                             | At the money Implied Volatility (Rolling Maturity) |
 |*historical* | options   | volume_total(market, currency, start(opt), end(opt), limit(opt), page(opt)                       | Volume total                                       |
 |*historical* | options   | oi_pc_ratio(market, currency, start(opt), end(opt), limit(opt), page(opt)                        | Open Interest Put/Call Ratio                       |
-|*historical* | options   | oi_total(market, currency, start(opt), end(opt), limit(opt), page(opt)                           | Instrument Historical Implied Volatility           |
+|*historical* | options   | oi_total(market, currency, start(opt), end(opt), limit(opt), page(opt)                           | Total Open Interest                                |
 |*historical* | options   | vix(market, currency, start(opt), end(opt), limit(opt), page(opt)                                | Vol Index                                          |
 |*historical* | options   | dvol(market, currency, start(opt), end(opt), limit(opt), page(opt)                               | Deribit Volatility Index (DVOL)                    |
 |*historical* | options   | atm_iv_model(market, currency, type, start(opt), end(opt), limit(opt), page(opt)                 | At the money Implied Volatility model              |
